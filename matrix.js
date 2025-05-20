@@ -17,7 +17,7 @@ const drops = new Array(columns).fill(0);
 // Disegno della pioggia
 function draw() {
   // Oscura il canvas leggermente per creare l’effetto scia
-  ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
+  ctx.fillStyle = "rgba(0, 0, 0, 0.015)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.fillStyle = "rgba(0, 255, 0, 0.5)";
