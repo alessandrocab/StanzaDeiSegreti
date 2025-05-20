@@ -1,27 +1,37 @@
 const canvas = document.getElementById('matrixRain');
 const ctx = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+let fontSize = 14;
+let letters = "アァイィウヴエカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハヒフヘホマミムメモヤユヨラリルレロワンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+letters = letters.split("");
 
-const letters = "アァイィウヴエカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハヒフヘホマミムメモヤユヨラリルレロワンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-const fontSize = 14;
-const columns = canvas.width / fontSize;
+let drops = [];
 
-const drops = Array(Math.floor(columns)).fill(1);
+function initializeMatrix() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
-function draw() {
+  const columns = Math.floor(canvas.width / fontSize);
+  drops = new Array(columns).fill(1);
+}
+
+function drawMatrix() {
+  // Sfondo trasparente per creare scia
   ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.fillStyle = "rgba(0, 255, 0, 0.07)";
-  ctx.font = fontSize + "px monospace";
+  ctx.font = `${fontSize}px monospace`;
 
   for (let i = 0; i < drops.length; i++) {
-    const text = letters[Math.floor(Math.random() * letters.length)];
-    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    const char = letters[Math.floor(Math.random() * letters.length)];
+    const x = i * fontSize;
+    const y = drops[i] * fontSize;
 
-    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+    ctx.fillText(char, x, y);
+
+    // Resetta la goccia con una probabilità casuale quando esce dallo schermo
+    if (y > canvas.height && Math.random() > 0.975) {
       drops[i] = 0;
     }
 
@@ -29,9 +39,10 @@ function draw() {
   }
 }
 
-setInterval(draw, 33);
+initializeMatrix();
+setInterval(drawMatrix, 33);
 
+// Resize dinamico
 window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  initializeMatrix();
 });
