@@ -8,7 +8,8 @@ const letters = "アァイィウヴエカガキギクグケゲコゴサザシジ
 const fontSize = 10;
 const columns = canvas.width / fontSize;
 
-const drops = Array(Math.floor(columns)).fill(1);
+const drops = Array(Math.floor(columns)).fill();
+.map(() =>> Math.random() * -50);
 
 function drawMatrix() {
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Rende trasparente
