@@ -1,96 +1,68 @@
-const bgMusic = document.getElementById("bg-music");
-const successSound = new Audio("success.mp3");
-const failSound = new Audio("fail.mp3");
+window.addEventListener("DOMContentLoaded", () => {
+  const bgMusic = document.getElementById("bg-music");
+  const successSound = new Audio("success.mp3");
+  const failSound = new Audio("fail.mp3");
 
-document.getElementById("start-button").addEventListener("click", () => {
-  document.getElementById("intro").style.display = "none";
-  document.getElementById("enigma1").style.display = "block";
-  bgMusic.play();
-});
+  document.getElementById("start-button").addEventListener("click", () => {
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("enigma1").style.display = "block";
+    bgMusic.play();
+  });
 
-function togglePassword(id) {
-  const input = document.getElementById(id);
-  input.type = input.type === "password" ? "text" : "password";
-}
+  function togglePassword(id) {
+    const input = document.getElementById(id);
+    input.type = input.type === "password" ? "text" : "password";
+  }
 
-function closeCustomAlert() {
-  document.getElementById("custom-alert").classList.add("hidden");
-}
+  window.togglePassword = togglePassword;
 
-function goBack() {
-  location.reload();
-}
+  function closeCustomAlert() {
+    document.getElementById("custom-alert").classList.add("hidden");
+  }
 
-// Funzione per rimuovere spazi, accenti e rendere lowercase
-function normalizeAnswer(str) {
-  return str
-    .normalize("NFD")                       // Decompone accenti
-    .replace(/[\u0300-\u036f]/g, "")       // Rimuove segni diacritici
-    .replace(/\s+/g, "")                   // Rimuove spazi
-    .toLowerCase();
-}
+  window.closeCustomAlert = closeCustomAlert;
 
-function checkEnigma(number) {
-  const answers = {
-    1: "8",
-    2: "75",
-    3: "stanzadellenecessita"
-  };
+  function goBack() {
+    location.reload();
+  }
 
-  const input = document.getElementById(input${number});
-  const userAnswer = normalizeAnswer(input.value);
-  const correctAnswer = normalizeAnswer(answers[number]);
+  window.goBack = goBack;
 
-  if (userAnswer === correctAnswer) {
-    document.getElementById(enigma${number}).style.display = "none";
+  function normalizeAnswer(str) {
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s+/g, "")
+      .toLowerCase();
+  }
 
-    if (number < 3) {
-      document.getElementById(enigma${number + 1}).style.display = "block";
+  function checkEnigma(number) {
+    const answers = {
+      1: "8",
+      2: "75",
+      3: "stanzadellenecessita"
+    };
+
+    const input = document.getElementById(`input${number}`);
+    const userAnswer = normalizeAnswer(input.value);
+    const correctAnswer = normalizeAnswer(answers[number]);
+
+    if (userAnswer === correctAnswer) {
+      document.getElementById(`enigma${number}`).style.display = "none";
+
+      if (number < 3) {
+        document.getElementById(`enigma${number + 1}`).style.display = "block";
+      } else {
+        bgMusic.pause();
+        successSound.play();
+        document.getElementById("revealed").style.display = "flex";
+      }
     } else {
-      bgMusic.pause();
-      successSound.play();
-      document.getElementById("revealed").style.display = "flex";
+      failSound.currentTime = 0;
+      failSound.play();
+      document.getElementById("custom-alert").classList.remove("hidden");
     }
-  } else {
-    failSound.currentTime = 0;
-    failSound.play();
-    document.getElementById("custom-alert").classList.remove("hidden");
   }
-}
-// MATRIX RAIN EFFECT
-const canvas = document.getElementById("matrixRain");
-const ctx = canvas.getContext("2d");
 
-// Imposta la dimensione del canvas a schermo intero
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const katakana = "アァイィウヴエェオカガキギクグケゲコゴサザシジスズセゼソゾタダチッヂヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモヤユヨラリルレロワヲン".split("");
-const columns = canvas.width / 20;
-const drops = Array.from({ length: columns }).fill(1);
-
-function drawMatrix() {
-  ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  ctx.fillStyle = "#0F0";
-  ctx.font = "16px monospace";
-
-  for (let i = 0; i < drops.length; i++) {
-    const text = katakana[Math.floor(Math.random() * katakana.length)];
-    ctx.fillText(text, i * 20, drops[i] * 20);
-
-    if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
-      drops[i] = 0;
-    }
-
-    drops[i]++;
-  }
-}
-
-setInterval(drawMatrix, 50);
-
-window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  window.checkEnigma = checkEnigma;
 });
