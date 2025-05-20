@@ -10,7 +10,8 @@
 <body>
 
 <canvas id="matrixRain"></canvas>
-<audio id="bg-music" loop autoplay src="background.mp3"></audio>
+
+<audio id="bg-music" loop src="background.mp3"></audio>
 <audio id="success-sound" src="success.mp3"></audio>
 <audio id="fail-sound" src="fail.mp3"></audio>
 
@@ -20,7 +21,7 @@
 </div>
 
 <!-- Enigma 1 -->
-<div id="enigma1" class="container" style="display: none;">
+<div id="enigma1" class="container hidden">
   <h1>Quanti film di Harry Potter sono stati realizzati?</h1>
   <div class="input-wrapper">
     <input type="password" id="input1" placeholder="Combinazione">
@@ -30,7 +31,7 @@
 </div>
 
 <!-- Enigma 2 -->
-<div id="enigma2" class="container" style="display: none;">
+<div id="enigma2" class="container hidden">
   <h1>Enigma 2</h1>
   <p>
     “Sono un numero a due cifre. La mia prima cifra è il numero di Horcrux creati da Voldemort.<br>
@@ -45,7 +46,7 @@
 </div>
 
 <!-- Enigma 3 -->
-<div id="enigma3" class="container" style="display: none;">
+<div id="enigma3" class="container hidden">
   <h1>Enigma 3</h1>
   <p>
     “Mi trovi solo quando davvero ne hai bisogno.<br>
@@ -61,7 +62,7 @@
 </div>
 
 <!-- Finale -->
-<div id="revealed" class="revealed" style="display: none;">
+<div id="revealed" class="revealed hidden">
   <div class="revealed-content">
     <h1>Complimenti! Corri al luogo che vedi nell'immagine!</h1>
     <p>(Chiesa di San Nicolò)</p>
@@ -76,9 +77,9 @@
     <button onclick="closeCustomAlert()">Chiudi</button>
   </div>
 </div>
-  <canvas id="matrixRain"></canvas>
+
 <script src="matrix.js"></script>
 <script src="script.js" defer></script>
-  
+
 </body>
 </html>
