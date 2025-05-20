@@ -118,6 +118,7 @@ button:hover {
   max-height: 80vh;
   width: 300px;
   overflow: auto;
+  border: 2px solid rgba(0, 191, 255, 0.8);
 }
 
 .revealed-content button {
