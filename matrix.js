@@ -5,33 +5,33 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const letters = "アァイィウヴエカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハヒフヘホマミムメモヤユヨラリルレロワンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-const fontSize = 12;
-const columns = canvas.width / fontSize;
+const fontSize = 14;
+const columns = Math.floor(canvas.width / fontSize);
 
-const drops = Array(Math.floor(columns)).fill(1);
+// Inizializza drops con numeri casuali tra -20 e 0 (più caratteri visibili per colonna)
+const drops = Array(columns).fill().map(() => Math.random() * -20);
 
-function drawMatrix() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height); // Rende trasparente
+function draw() {
+  ctx.fillStyle = "rgba(0, 0, 0, 0.015)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "rgba(0, 255, 0, 0.5)";
-  ctx.font = `${fontSize}px monospace`;
+  ctx.fillStyle = "rgba(0, 255, 0, 0.03)";
+  ctx.font = fontSize + "px monospace";
 
   for (let i = 0; i < drops.length; i++) {
-    const char = letters[Math.floor(Math.random() * letters.length)];
-    const x = i * fontSize;
-    const y = drops[i] * fontSize;
+    const text = letters[Math.floor(Math.random() * letters.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-    ctx.fillText(char, x, y);
-
-    if (y > canvas.height && Math.random() > 0.975) {
+    // Riparti occasionalmente
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
       drops[i] = 0;
     }
 
-    drops[i]++;
+    drops[i] += 0.3; // Pioggia più lenta (0.3 invece di 1)
   }
 }
 
-setInterval(drawMatrix, 99);
+setInterval(draw, 50); // intervallo più lento (50ms invece di 33)
 
 window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;
