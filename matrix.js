@@ -28,7 +28,7 @@ function draw() {
   }
 }
 
-setInterval(draw, 50);
+setInterval(draw, 99);
 
 window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;
