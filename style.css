@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'MedievalSharp', cursive;
+  background-image: url('https://img.posterstore.com/zoom/wb0101-8harrypotter-thephilosophersstoneno150x70.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #000;
+  overflow-x: hidden;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.85); /* bianco semi-trasparente */
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 20px;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.6);
+  text-align: center;
+  animation: pulse-border 2s infinite;
+  border: 2px solid rgba(0, 191, 255, 0.8);
+}
+
+@keyframes pulse-border {
+  0% {
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 191, 255, 1);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.6);
+  }
+}
+
+input[type="password"],
+input[type="text"] {
+  padding: 10px;
+  font-size: 18px;
+  font-family: 'MedievalSharp', cursive;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding-right: 40px; /* spazio per l’occhio */
+}
+
+.input-wrapper {
+  position: relative;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding-right: 40px; /* spazio per l’occhio */
+}
+
+.eye-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+  color: #666;
+  padding: 0;
+  line-height: 1;
+  z-index: 2;
+}
+
+button {
+  background-color: #6a0dad;
+  color: #fff;
+  font-size: 18px;
+  font-family: 'MedievalSharp', cursive;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: auto;
+}
+
+button:hover {
+  background-color: #8a2be2;
+}
+
+.revealed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  background-image: url('chiesa.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #fff;
+  z-index: 99;
+  text-align: center;
+}
+
+.revealed-content {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 90%;
+  width: 400px;
+}
+
+.revealed-content button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  width: auto;
+  background-color: #6a0dad;
+  color: #fff;
+  font-family: 'MedievalSharp', cursive;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.revealed-content button:hover {
+  background-color: #8a2be2;
+}
+
+.custom-alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fdf6e3;
+  border: 2px solid gold;
+  padding: 30px;
+  z-index: 9999;
+  color: #111;
+  border-radius: 15px;
+  max-width: 80%;
+  text-align: center;
+  box-shadow: 0 0 10px gold;
+}
+
+.custom-alert-box button {
+  background-color: gold;
+  font-size: 16px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-family: 'MedievalSharp', cursive;
+  color: black;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  body {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+  .container,
+  #intro,
+  #enigma1,
+  #enigma2,
+  #enigma3,
+  .revealed-content {
+    width: 90%;
+    padding: 15px;
+    font-size: 16px;
+    margin: 20px auto;
+  }
+
+  input[type="password"],
+  input[type="text"] {
+    font-size: 16px;
+    padding: 10px;
+    padding-right: 40px; /* spazio per l’occhio */
+  }
+
+  .eye-button {
+    font-size: 18px;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  button {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+
+  .revealed-content {
+    padding: 20px;
+    width: 90%;
+  }
+
+}
