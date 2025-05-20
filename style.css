@@ -11,6 +11,12 @@ body {
   overflow-x: hidden;
   position: relative;
   z-index: 2;
+
+  /* AGGIUNTO: centra il contenuto verticalmente e orizzontalmente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .container {
