@@ -5,7 +5,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const letters = "アァイィウヴエカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハヒフヘホマミムメモヤユヨラリルレロワンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-const fontSize = 14;
+const fontSize = 10;
 const columns = canvas.width / fontSize;
 
 const drops = Array(Math.floor(columns)).fill(1);
@@ -13,7 +13,7 @@ const drops = Array(Math.floor(columns)).fill(1);
 function drawMatrix() {
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Rende trasparente
 
-  ctx.fillStyle = "rgba(0, 255, 0, 0.1)";
+  ctx.fillStyle = "rgba(0, 255, 0, 0.2)";
   ctx.font = `${fontSize}px monospace`;
 
   for (let i = 0; i < drops.length; i++) {
@@ -31,7 +31,7 @@ function drawMatrix() {
   }
 }
 
-setInterval(drawMatrix, 33);
+setInterval(drawMatrix, 66);
 
 window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;
