@@ -57,3 +57,40 @@ function checkEnigma(number) {
     document.getElementById("custom-alert").classList.remove("hidden");
   }
 }
+// MATRIX RAIN EFFECT
+const canvas = document.getElementById("matrixRain");
+const ctx = canvas.getContext("2d");
+
+// Imposta la dimensione del canvas a schermo intero
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const katakana = "アァイィウヴエェオカガキギクグケゲコゴサザシジスズセゼソゾタダチッヂヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモヤユヨラリルレロワヲン".split("");
+const columns = canvas.width / 20;
+const drops = Array.from({ length: columns }).fill(1);
+
+function drawMatrix() {
+  ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#0F0";
+  ctx.font = "16px monospace";
+
+  for (let i = 0; i < drops.length; i++) {
+    const text = katakana[Math.floor(Math.random() * katakana.length)];
+    ctx.fillText(text, i * 20, drops[i] * 20);
+
+    if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
+      drops[i] = 0;
+    }
+
+    drops[i]++;
+  }
+}
+
+setInterval(drawMatrix, 50);
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
