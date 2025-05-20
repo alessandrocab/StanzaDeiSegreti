@@ -10,11 +10,11 @@ body {
   color: #000;
   overflow-x: hidden;
   position: relative;
-  z-index: 2; 
+  z-index: 2;
 }
 
 .container {
-  background-color: rgba(255, 255, 255, 0.85); /* bianco semi-trasparente */
+  background-color: rgba(255, 255, 255, 0.85);
   margin: auto;
   padding: 20px;
   border-radius: 20px;
@@ -39,18 +39,6 @@ body {
   }
 }
 
-input[type="password"],
-input[type="text"] {
-  padding: 10px;
-  font-size: 18px;
-  font-family: 'MedievalSharp', cursive;
-  width: 100%;
-  box-sizing: border-box;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  padding-right: 40px; /* spazio per l’occhio */
-}
-
 .input-wrapper {
   position: relative;
   margin-bottom: 10px;
@@ -59,8 +47,14 @@ input[type="text"] {
 }
 
 .input-wrapper input {
+  padding: 10px;
+  font-size: 18px;
+  font-family: 'MedievalSharp', cursive;
   width: 100%;
-  padding-right: 40px; /* spazio per l’occhio */
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding-right: 40px;
 }
 
 .eye-button {
@@ -89,7 +83,6 @@ button {
   margin-top: 10px;
   cursor: pointer;
   transition: background 0.3s ease;
-  width: auto;
 }
 
 button:hover {
@@ -121,16 +114,14 @@ button:hover {
 }
 
 .revealed-content button {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  width: auto;
   background-color: #6a0dad;
   color: #fff;
+  font-size: 16px;
   font-family: 'MedievalSharp', cursive;
   border: none;
   border-radius: 10px;
+  padding: 10px 20px;
+  margin-top: 20px;
   cursor: pointer;
   transition: background 0.3s ease;
 }
@@ -173,14 +164,11 @@ button:hover {
 
 @media (max-width: 480px) {
   body {
-  padding-left: 20px;
-  padding-right: 20px;
-}
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
   .container,
-  #intro,
-  #enigma1,
-  #enigma2,
-  #enigma3,
   .revealed-content {
     width: 90%;
     padding: 15px;
@@ -188,18 +176,13 @@ button:hover {
     margin: 20px auto;
   }
 
-  input[type="password"],
-  input[type="text"] {
+  .input-wrapper input {
     font-size: 16px;
     padding: 10px;
-    padding-right: 40px; /* spazio per l’occhio */
   }
 
   .eye-button {
     font-size: 18px;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
   }
 
   button {
@@ -209,10 +192,9 @@ button:hover {
 
   .revealed-content {
     padding: 20px;
-    width: 90%;
   }
-
 }
+
 #matrixRain {
   position: fixed;
   top: 0;
