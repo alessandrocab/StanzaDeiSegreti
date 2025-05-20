@@ -5,7 +5,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const letters = "アァイィウヴエカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハヒフヘホマミムメモヤユヨラリルレロワンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-const fontSize = 10;
+const fontSize = 12;
 const columns = canvas.width / fontSize;
 
 const drops = Array(Math.floor(columns)).fill(1);
@@ -31,7 +31,7 @@ function drawMatrix() {
   }
 }
 
-setInterval(drawMatrix, 66);
+setInterval(drawMatrix, 99);
 
 window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;
