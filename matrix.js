@@ -13,7 +13,7 @@ const drops = Array(Math.floor(columns)).fill(1);
 function drawMatrix() {
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Rende trasparente
 
-  ctx.fillStyle = "rgba(0, 255, 0, 0.2)";
+  ctx.fillStyle = "rgba(0, 255, 0, 0.5)";
   ctx.font = `${fontSize}px monospace`;
 
   for (let i = 0; i < drops.length; i++) {
