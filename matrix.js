@@ -4,35 +4,42 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+// Lettere utilizzate
 const letters = "アァイィウヴエカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハヒフヘホマミムメモヤユヨラリルレロワンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+// Impostazioni
 const fontSize = 14;
 const columns = Math.floor(canvas.width / fontSize);
 
-// Inizializza drops con numeri casuali tra -20 e 0 (più caratteri visibili per colonna)
-const drops = Array(columns).fill().map(() => Math.random() * -20);
+// Gocce iniziali
+const drops = new Array(columns).fill(0);
 
+// Disegno della pioggia
 function draw() {
-  ctx.fillStyle = "rgba(0, 0, 0, 0.002)";
+  // Oscura il canvas leggermente per creare l’effetto scia
+  ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "rgba(0, 255, 0, 0.03)";
+  ctx.fillStyle = "rgba(0, 255, 0, 0.5)";
   ctx.font = fontSize + "px monospace";
 
   for (let i = 0; i < drops.length; i++) {
     const text = letters[Math.floor(Math.random() * letters.length)];
     ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-    // Riparti occasionalmente
+    // Riparti la goccia dall’alto con una certa probabilità
     if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
       drops[i] = 0;
     }
 
-    drops[i] += 0.3; // Pioggia più lenta (0.3 invece di 1)
+    drops[i]++;
   }
 }
 
-setInterval(draw, 50); // intervallo più lento (50ms invece di 33)
+// Pioggia più lenta: intervallo più alto (50ms)
+setInterval(draw, 50);
 
+// Resize dinamico
 window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
