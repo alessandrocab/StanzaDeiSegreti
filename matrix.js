@@ -1,26 +1,19 @@
 const canvas = document.getElementById('matrixRain');
 const ctx = canvas.getContext('2d');
 
-let fontSize = 14;
-let letters = "アァイィウヴエカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハヒフヘホマミムメモヤユヨラリルレロワンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-letters = letters.split("");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-let drops = [];
+const letters = "アァイィウヴエカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハヒフヘホマミムメモヤユヨラリルレロワンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+const fontSize = 14;
+const columns = canvas.width / fontSize;
 
-function initializeMatrix() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  const columns = Math.floor(canvas.width / fontSize);
-  drops = new Array(columns).fill(1);
-}
+const drops = Array(Math.floor(columns)).fill(1);
 
 function drawMatrix() {
-  // Sfondo trasparente per creare scia
-  ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height); // Rende trasparente
 
-  ctx.fillStyle = "rgba(0, 255, 0, 0.07)";
+  ctx.fillStyle = "rgba(0, 255, 0, 0.1)";
   ctx.font = `${fontSize}px monospace`;
 
   for (let i = 0; i < drops.length; i++) {
@@ -30,7 +23,6 @@ function drawMatrix() {
 
     ctx.fillText(char, x, y);
 
-    // Resetta la goccia con una probabilità casuale quando esce dallo schermo
     if (y > canvas.height && Math.random() > 0.975) {
       drops[i] = 0;
     }
@@ -39,10 +31,9 @@ function drawMatrix() {
   }
 }
 
-initializeMatrix();
 setInterval(drawMatrix, 33);
 
-// Resize dinamico
 window.addEventListener("resize", () => {
-  initializeMatrix();
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 });
