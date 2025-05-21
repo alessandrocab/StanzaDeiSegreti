@@ -8,24 +8,29 @@ const characters = 'アァイィウヴエカキクケコサシスセソタチツ
 const fontSize = 20;
 const columnCount = Math.floor(canvas.width / fontSize);
 const drops = Array(columnCount).fill(0);
+const trails = 10; // numero di caratteri visibili per colonna
 
 function draw() {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+
   ctx.fillStyle = '#0F0';
   ctx.font = fontSize + 'px monospace';
 
   for (let i = 0; i < drops.length; i++) {
-    const text = characters[Math.floor(Math.random() * characters.length)];
+    for (let j = 0; j < trails; j++) {
+      const text = characters[Math.floor(Math.random() * characters.length)];
+      ctx.fillText(
+        text,
+        i * fontSize,
+        (drops[i] - j * 2) * fontSize // spazio verticale tra i caratteri nella colonna
+      );
+    }
 
-    // Mostra un solo carattere per colonna, più separato verticalmente
-    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-    // Maggiore salto tra i caratteri
     if (Math.random() > 0.95) {
       drops[i] = 0;
     } else {
-      drops[i] += 1.5; // aumenta per maggiore distanza verticale
+      drops[i] += 1;
     }
   }
 }
