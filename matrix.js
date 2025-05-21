@@ -1,43 +1,33 @@
-const canvas = document.getElementById('matrixRain');
+const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
 
-const letters = "アァイィウヴエカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハヒフヘホマミムメモヤユヨラリルレロワンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-const fontSize = 14;
-const columns = Math.floor(canvas.width / fontSize);
-
-const drops = [];
-for (let i = 0; i < columns; i++) {
-  drops[i] = Math.random() * canvas.height;
-}
+const characters = 'アァイィウヴエカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const fontSize = 20;
+const columnCount = Math.floor(canvas.width / fontSize);
+const drops = Array(columnCount).fill(0);
 
 function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height); // pulisce tutto ad ogni frame
-
-  ctx.fillStyle = "rgba(0, 255, 0, 0.7)";
-  ctx.font = fontSize + "px monospace";
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#0F0';
+  ctx.font = fontSize + 'px monospace';
 
   for (let i = 0; i < drops.length; i++) {
-    const text = letters[Math.floor(Math.random() * letters.length)];
-    const x = i * fontSize;
-    const y = drops[i] * fontSize;
+    const text = characters[Math.floor(Math.random() * characters.length)];
 
-    ctx.fillText(text, x, y);
+    // Mostra un solo carattere per colonna, più separato verticalmente
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-    // Reset goccia casualmente per effetto dinamico
-    if (y > canvas.height && Math.random() > 0.975) {
+    // Maggiore salto tra i caratteri
+    if (Math.random() > 0.95) {
       drops[i] = 0;
     } else {
-      drops[i] += 0.5; // controlla la velocità (più basso = più lento)
+      drops[i] += 1.5; // aumenta per maggiore distanza verticale
     }
   }
 }
 
-setInterval(draw, 100);
-
-window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
+setInterval(draw, 50);
