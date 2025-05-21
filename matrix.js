@@ -1,39 +1,75 @@
-window.onload = function () {
-  const canvas = document.getElementById('matrixCanvas');
-  const ctx = canvas.getContext('2d');
+const canvas = document.getElementById('matrixRain');
 
-  canvas.height = window.innerHeight;
-  canvas.width = window.innerWidth;
+const ctx = canvas.getContext('2d');
 
-  const characters = 'アァイィウヴエカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-  const fontSize = 20;
-  const columnCount = Math.floor(canvas.width / fontSize);
-  const drops = Array(columnCount).fill(0);
-  const trails = 10;
 
-  function draw() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+canvas.width = window.innerWidth;
 
-    ctx.fillStyle = '#0F0';
-    ctx.font = fontSize + 'px monospace';
+canvas.height = window.innerHeight;
 
-    for (let i = 0; i < drops.length; i++) {
-      for (let j = 0; j < trails; j++) {
-        const y = (drops[i] - j * 2) * fontSize;
-        if (y > 0 && y < canvas.height) {
-          const text = characters[Math.floor(Math.random() * characters.length)];
-          ctx.fillText(text, i * fontSize, y);
-        }
-      }
 
-      if (Math.random() > 0.95) {
-        drops[i] = 0;
-      } else {
-        drops[i] += 1;
-      }
-    }
-  }
+const letters = "アァイィウヴエカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハヒフヘホマミムメモヤユヨラリルレロワンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-  setInterval(draw, 50);
-};
+const fontSize = 14;
+
+const columns = Math.floor(canvas.width / fontSize);
+
+
+const drops = [];
+
+for (let i = 0; i < columns; i++) {
+
+drops[i] = Math.random() * canvas.height;
+
+}
+
+
+function draw() {
+
+ctx.clearRect(0, 0, canvas.width, canvas.height); // pulisce tutto ad ogni frame
+
+
+ctx.fillStyle = "rgba(0, 255, 0, 0.7)";
+
+ctx.font = fontSize + "px monospace";
+
+
+for (let i = 0; i < drops.length; i++) {
+
+const text = letters[Math.floor(Math.random() * letters.length)];
+
+const x = i * fontSize;
+
+const y = drops[i] * fontSize;
+
+
+ctx.fillText(text, x, y);
+
+
+// Reset goccia casualmente per effetto dinamico
+
+if (y > canvas.height && Math.random() > 0.975) {
+
+drops[i] = 0;
+
+} else {
+
+drops[i] += 0.5; // controlla la velocità (più basso = più lento)
+
+}
+
+}
+
+}
+
+
+setInterval(draw, 100);
+
+
+window.addEventListener("resize", () => {
+
+canvas.width = window.innerWidth;
+
+canvas.height = window.innerHeight;
+
+});
