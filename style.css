@@ -104,10 +104,19 @@ button:hover {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
   color: #fff;
   z-index: 99;
   text-align: center;
+}
+
+/* Specifica per dispositivi mobili */
+@media (max-width: 600px) {
+  .revealed {
+    background-size: contain;
+    background-attachment: scroll; /* assicurati che non resti fixed */
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
 }
 
 .revealed-content {
