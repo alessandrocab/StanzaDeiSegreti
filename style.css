@@ -12,6 +12,7 @@ body {
   position: relative;
   z-index: 2;
 
+  /* centra il contenuto verticalmente e orizzontalmente */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,7 +99,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   position: fixed;
   inset: 0;
   background-color: #000;
@@ -106,40 +107,30 @@ button:hover {
   z-index: 99;
   text-align: center;
   padding: 20px;
+  overflow-y: auto;
   gap: 20px;
 }
 
 .revealed-image {
   max-width: 90%;
-  max-height: 70vh;
+  max-height: 40vh;
   border-radius: 15px;
   border: 2px solid rgba(0, 191, 255, 0.8);
   box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
   object-fit: cover;
-}
-
-/* Specifica per dispositivi mobili */
-@media (max-width: 600px) {
-  .revealed-image {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .revealed {
-    background-color: #000;
-    padding: 20px;
-  }
+  flex-shrink: 0;
 }
 
 .revealed-content {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 15px;
   max-width: 85%;
-  max-height: 80vh;
+  max-height: 50vh;
   width: 300px;
-  overflow: auto;
+  overflow-y: auto;
   border: 2px solid rgba(0, 191, 255, 0.8);
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.8);
 }
 
 .revealed-content button {
